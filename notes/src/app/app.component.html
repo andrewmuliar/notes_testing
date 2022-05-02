@@ -1,0 +1,26 @@
+<section>
+  <div class = "note_list">
+    <div class = "holder">
+      <input class = "search" type = "text" placeholder = "Search" [(ngModel)] = "search">
+      <div class = "add" (click) = "newItem()">+</div>
+    </div>
+    <div class = "overflow" *ngIf = "notes && notes.length > 0; else noNotes">
+      <app-note-item 
+          [note] = "note" *ngFor = "let note of notes | sortByDate | filter:search:selectedTag"
+          (noteSelected) = "selectedNote = $event"
+          (noteRemoved) = "removeNote($event)">
+      </app-note-item>
+    </div>
+    <ng-template #noNotes>
+      <div>No notes 🤯🤯🤯</div>
+    </ng-template>
+    <div class = "tags">
+      <div *ngFor = "let tag of tags" [ngStyle] = "{'background':selectedTag === tag ? 'red':'white'}" (click) = "toggleTag(tag)">
+        {{ tag }}
+      </div>
+    </div>
+  </div>
+  <div class = "details">
+    <app-note-detail (changed) = "editNote($event)" [tags] = "tags" *ngIf = "selectedNote" [note] = "selectedNote"></app-note-detail>
+  </div>
+</section>

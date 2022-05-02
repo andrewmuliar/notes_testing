@@ -1,0 +1,7 @@
+<div class = "item_note" (click) = "selectNote()">
+  <div class = "header">
+    <div class = "title">{{ note.title }}</div>
+    <div class = "delete" (click) = "removeNote()">X</div>
+  </div>
+  <div class = "created">{{ note.created | dateFormat }}</div>
+</div>

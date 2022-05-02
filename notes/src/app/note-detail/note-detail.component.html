@@ -1,0 +1,12 @@
+<section *ngIf = "note">
+  <div class = "title" *ngIf = "readTitle; else editTitle" (click) = "readTitle = false">
+    {{ note.title }}
+  </div>
+  <ng-template #editTitle>
+    <input type = "text" (focusout) = "noteChanged(); readTitle = true" [(ngModel)] = "note.title" />
+  </ng-template>
+  <div class = "body" [innerHtml] = "parseTag()" (click) = "readBody = false" *ngIf = "readBody; else editBody"></div>
+  <ng-template #editBody>
+    <input type = "text" (focusout) = "noteChanged(); readBody = true" [(ngModel)] = "note.body" />
+  </ng-template>
+</section>
